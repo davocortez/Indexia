@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package SERVLETS;
-
+///puto
 import BEAN.ProductoBean;
 import BEAN.ProveedorBean;
 import DAO.ProductoDAO;
