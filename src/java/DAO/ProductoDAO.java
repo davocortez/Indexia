@@ -82,7 +82,7 @@ public class ProductoDAO {
 
     public boolean modificarProducto(ProductoBean bean) throws SQLException {
         Connection con = ConexionSQLServer.getConnection();
-        PreparedStatement ps= con.PreparedStatement(modificar);
+        PreparedStatement ps= con.prepareStatement(modificar);
 
         return false;
 

@@ -26,6 +26,7 @@ public class ProveedorDAO {
     String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,idTipoProvedor)values(?,?,?,?,?)";
     String consultar = "select * from Proveedor";
     String consultarTipo = "select * from TipoProvedor";
+     String modificarProveedor = "UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=?,Estado=?,TipoProveedor=? WHERE idProvedor;";
 
     public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
         boolean status = false;
@@ -107,4 +108,26 @@ public class ProveedorDAO {
         return listaTipoProveedor;
 
     }
+    
+     public boolean modificarProveedor(ProveedorBean beanProveedor) {
+        boolean resultado = false;
+        try {
+            Connection con = ConexionSQLServer.getConnection();
+            PreparedStatement ps = con.prepareStatement(modificarProveedor);
+
+            ps.setString(1, beanProveedor.getNombre());
+            ps.setString(2, beanProveedor.getTelefono());
+            ps.setString(3, beanProveedor.getDireccion());
+            ps.setString(4, beanProveedor.getCorreo());
+            ps.setString(5, "1");
+           ps.setInt(6, beanProveedor.getIdTipoProveedor());
+            resultado = ps.executeUpdate() == 1;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return resultado;
+    }
+
 }

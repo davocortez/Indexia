@@ -5,7 +5,7 @@
  */
 package SERVLETS;
 ///puto mono
-import BEAN.ProductoBean;
+import BEAN.ProductoBean; 
 import BEAN.ProveedorBean;
 import DAO.ProductoDAO;
 import java.io.IOException;
