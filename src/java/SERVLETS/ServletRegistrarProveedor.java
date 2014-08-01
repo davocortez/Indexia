@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package SERVLETS;
 
-
-//puto
 import BEAN.ProveedorBean;
 import DAO.ProveedorDAO;
 import java.io.IOException;
@@ -34,59 +31,47 @@ public class ServletRegistrarProveedor extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String xml = "";
+
+        ProveedorDAO daoProveedor = new ProveedorDAO();
+        ProveedorBean bean = new ProveedorBean();
+        int tipo = 0;
+
+        String nombre = request.getParameter("nombre");
+        System.out.println("campo de texto nombre: " + nombre);
+        String telefono = request.getParameter("telefono");
+        System.out.println("campo de texto telefono: " + telefono);
+        String direccion = request.getParameter("direccion");
+        System.out.println("campo de texto direccion: " + direccion);
+        String correo = request.getParameter("correo");
+        System.out.println("campo de texto correo: " + correo);
+        String type = request.getParameter("tipoProveedor");
+        tipo = Integer.parseInt(type);
         
-        try {
-             int tipo = 0;
-             ProveedorBean beanProveedor = new ProveedorBean();
-            //Trae los valores de flex
-            String nombre = request.getParameter("nombre");
-            String telefono = request.getParameter("telefono");
-            String direccion = request.getParameter("direccion");
-            String correo = request.getParameter("correo");
-            String tipoProveedor1 = request.getParameter("tipoProveedor");
-            if (tipoProveedor1 == "Nacional") {
-            tipo=1;               
-            }else if(tipoProveedor1=="Internacional"){
-               tipo=2;
-            }            
-            ProveedorDAO daoProveedor = new ProveedorDAO();           
-            beanProveedor.setNombre(nombre);
-            beanProveedor.setTelefono(telefono);
-            beanProveedor.setDireccion(direccion);
-            beanProveedor.setCorreo(correo);
-            beanProveedor.setIdTipoProveedor(tipo);
-          
-            boolean ok = daoProveedor.insertarProveedor(beanProveedor);
-            String xml = "";
-            if (ok) {
-                 xml = generarXML(true);
-            }else{
-                  xml = generarXML(false);
-            }         
-            response.setContentType("txt/xml;charset=UTF-8");
-            response.getWriter().write(xml);
-        } finally {
-        }
+        xml=generarXML(daoProveedor.insertarProveedor(nombre, telefono, direccion, correo, tipo+1));
+        response.setContentType("txt/xml;charset=UTF-8");
+        response.getWriter().write(xml);
+        out.close();
     }
 
-    private String generarXML(boolean resultado) {
+    public String generarXML(boolean resultado) {
         StringBuilder xml = new StringBuilder();
-        
-         xml.append("<resultado>");
-    xml.append("<respuesta>");
-    xml.append("<evento>");
-    xml.append(resultado);
-    xml.append("</evento>");
-    xml.append("</respuesta>");
-    xml.append("</resultado>");
+
+        xml.append("<resultado>");
+        xml.append("<respuesta>");
+        xml.append("<proveedor>");
+        xml.append(resultado);
+        xml.append("</proveedor>");
+        xml.append("</respuesta>");
+        xml.append("</resultado>");
 
         return xml.toString();
-    }
 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

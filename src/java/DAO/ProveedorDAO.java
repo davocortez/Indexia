@@ -23,29 +23,29 @@ import java.util.logging.Logger;
  */
 public class ProveedorDAO {
 
-    String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,estado,idTipoProvedor)values(?,?,?,?,?,?)";
+    String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,idTipoProvedor)values(?,?,?,?,?)";
     String consultar = "select * from Proveedor";
     String consultarTipo = "select * from TipoProvedor";
 
-    public boolean insertarProveedor(ProveedorBean bean) {
+    public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
         boolean status = false;
         try {
             Connection con = ConexionSQLServer.getConnection();
             PreparedStatement ps = con.prepareStatement(insert);
-
-            ps.setString(1, bean.getNombre());
-            ps.setString(2, bean.getTelefono());
-            ps.setString(3, bean.getDireccion());
-            ps.setString(4, bean.getCorreo());
-            ps.setInt(5, 1);
-            ps.setInt(6, bean.getIdTipoProveedor());
             
+            ps.setString(1, nombre);
+            ps.setString(2, telefono);
+            ps.setString(3, direccion);
+            ps.setString(4, correo);
+            ps.setInt(5, idTipo);
+       
             status = ps.executeUpdate()==1;
+            
             ps.close();
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProveedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return status;
     }
@@ -95,7 +95,6 @@ public class ProveedorDAO {
 
                 bean.setIdTipoProvedor(rs.getInt(1));
                 bean.setDescripcion(rs.getString(2));
-
                 listaTipoProveedor.add(bean);
             }
             rs.close();

@@ -24,8 +24,9 @@ public class ProductoDAO {
 
     String registrar = "insert into Producto(nombre,tipo,cantidad,marca,precioCompra"
             + ",precioVenta,cantidadMinima,descripcionProducto)values(?,?,?,?,?,?,?,?)";
-
     String sQlConsultarProducto = "select * from Producto;";
+    String modificar = "UPDATE Producto SET nombre=(?), tipo=(?), cantidad=(?), marca=(?), precioCompra=(?), "
+            + "precioVenta=(?), cantidadMinima=(?),descripcionProducto=(?) WHERE idProducto =?";
 
     public boolean insertarProducto(String nombre, String tipo, String cantidad, String marca,
             String precioCompra, String precioVenta, String cantidadMinima, String descripcionProducto) {
@@ -59,7 +60,7 @@ public class ProductoDAO {
             Connection con = ConexionSQLServer.getConnection();
             PreparedStatement ps = con.prepareStatement(sQlConsultarProducto);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 ProductoBean bean = new ProductoBean();
                 bean.setIdProducto(rs.getInt(1));
                 bean.setNombre(rs.getString(2));
@@ -70,13 +71,21 @@ public class ProductoDAO {
                 bean.setPrecioVenta(rs.getString(7));
                 bean.setCantidadMinima(rs.getString(8));
                 bean.setDescripcion(rs.getString(9));
-                
+
                 listaProductos.add(bean);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return listaProductos;
+    }
+
+    public boolean modificarProducto(ProductoBean bean) throws SQLException {
+        Connection con = ConexionSQLServer.getConnection();
+        PreparedStatement ps= con.PreparedStatement(modificar);
+
+        return false;
+
     }
 
 }

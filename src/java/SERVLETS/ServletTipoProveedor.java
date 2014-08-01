@@ -41,7 +41,6 @@ public class ServletTipoProveedor extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            TipoProveedorBean proveedor = new TipoProveedorBean();
             List listaTipoProveedor = new ArrayList();
             ProveedorDAO prDao = new ProveedorDAO();
             listaTipoProveedor = prDao.consultarTipo();

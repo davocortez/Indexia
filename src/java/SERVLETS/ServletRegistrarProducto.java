@@ -5,7 +5,7 @@
  */
 package SERVLETS;
 
-import DAO.LoginDAO;
+
 import DAO.ProductoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +50,7 @@ public class ServletRegistrarProducto extends HttpServlet {
 
         xml = generarXML(dao.insertarProducto(nombre, tipo, cantidad, marca,
                 precioCompra, precioVenta, cantidadMinima, descripcion));
+        
         response.setContentType("txt/xml;charset=UTF-8");
         response.getWriter().write(xml);
         out.close();
