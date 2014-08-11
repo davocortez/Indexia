@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class UsuarioDAO {
     
-    String registrar = "insert into usuario(Usuario, Contrasena, idTipoUsuario)" +
+    String registrar = "insert into Usuario(Usuario, Contrasena, idTipoUsuario)" +
                        "values(?,?,?);";
 
     public boolean insertarUsuario(String usuario, String contrasena, String idTipoUsuario) {
@@ -37,6 +37,7 @@ public class UsuarioDAO {
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en en el metodo insertarUsuario() "+ex);
         }
         return status;
     }    

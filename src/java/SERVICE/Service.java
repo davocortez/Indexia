@@ -33,8 +33,7 @@ public class Service {
     public String agregarUsuario(@WebParam(name = "usuario") String usuario, @WebParam(name = "contrasena") String contrasena, @WebParam(name = "idTipoUsuario") String idTipoUsuario) {
         //TODO write your implementation code here:
         UsuarioDAO dao = new UsuarioDAO();
-        String respuesta = "false";
-        
+        String respuesta = "false";        
         if(dao.insertarUsuario(usuario, contrasena, idTipoUsuario)){
             respuesta = "true";
         }        
