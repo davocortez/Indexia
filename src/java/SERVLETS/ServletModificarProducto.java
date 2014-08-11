@@ -44,10 +44,10 @@ public class ServletModificarProducto extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String tipo = request.getParameter("tipo");
             String cantidad= request.getParameter("cantidad");
-            String marcar=request.getParameter("marcar");
-            String precioCompra = request.getParameter("precio");
+            String marcar=request.getParameter("marca");
+            String precioCompra = request.getParameter("precioCompra");
             String precioVenta = request.getParameter("precioVenta");
-            String cantidadMin = request.getParameter("cantidadMinima");
+            String cantidadMin = request.getParameter("cantidadMin");
             String descripcion = request.getParameter("descripcion");
             
             bean.setIdProducto(idProducto);
@@ -58,9 +58,7 @@ public class ServletModificarProducto extends HttpServlet {
             bean.setPrecioCompra(precioCompra);
             bean.setPrecioVenta(precioVenta);
             bean.setCantidadMinima(cantidadMin);
-            bean.setDescripcion(descripcion);
-            
-            
+            bean.setDescripcion(descripcion);            
             String xml=generarXML(dao.modificarProducto(bean));
             response.setContentType("text/xml;charset=UTF-8");
             response.getWriter().write(xml);

@@ -81,7 +81,6 @@ public class ProveedorDAO {
             Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaProveedor;
-
     }
 
     public List consultarTipo() {
@@ -127,7 +126,6 @@ public class ProveedorDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return resultado;
     }
 
