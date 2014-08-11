@@ -6,10 +6,14 @@
 
 package SERVICE;
 
+import DAO.LoginDAO;
 import DAO.UsuarioDAO;
-import javax.jws.WebService;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
 
 /**
  *
@@ -37,6 +41,24 @@ public class Service {
         if(dao.insertarUsuario(usuario, contrasena, idTipoUsuario)){
             respuesta = "true";
         }        
+        return respuesta;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "iniciarSesion")
+    public String iniciarSesion(@WebParam(name = "usuario") String usuario, @WebParam(name = "contrasena") String contrasena) {
+        //TODO write your implementation code here:
+        LoginDAO dao=new LoginDAO();
+        String respuesta = "false";
+        try {
+            if(dao.validarUsuario(usuario, contrasena)){
+                respuesta = "true";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return respuesta;
     }
 }
