@@ -26,7 +26,8 @@ public class ProveedorDAO {
     String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,idTipoProvedor)values(?,?,?,?,?)";
     String consultar = "select * from Proveedor";
     String consultarTipo = "select * from TipoProvedor";
-     String modificarProveedor = "UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=?,Estado=?,TipoProveedor=? WHERE idProvedor;";
+     String modificarProveedor = "UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=?"
+             + ",Estado=?,TipoProveedor=? WHERE idProvedor=?;";
 
     public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
         boolean status = false;

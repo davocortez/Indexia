@@ -1,17 +1,19 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package SERVLETS;
 
-import BEAN.ProveedorBean;
-import DAO.ProveedorDAO;
+import BEAN.ProductoBean;
+import DAO.ProductoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author David
  */
-@WebServlet(name = "ServletRegistrarProveedor", urlPatterns = {"/ServletRegistrarProveedor"})
-public class ServletRegistrarProveedor extends HttpServlet {
+public class ServletModificarProducto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,45 +37,54 @@ public class ServletRegistrarProveedor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String xml = "";
-
-        ProveedorDAO daoProveedor = new ProveedorDAO();
-        ProveedorBean bean = new ProveedorBean();
-        int tipo = 0;
-
-        String nombre = request.getParameter("nombre");
-        System.out.println("campo de texto nombre: " + nombre);
-        String telefono = request.getParameter("telefono");
-        System.out.println("campo de texto telefono: " + telefono);
-        String direccion = request.getParameter("direccion");
-        System.out.println("campo de texto direccion: " + direccion);
-        String correo = request.getParameter("correo");
-        System.out.println("campo de texto correo: " + correo);
-        String type = request.getParameter("tipoProveedor");
-        System.out.println("type: -----------------------"+type);
-        tipo = Integer.parseInt(type);
-        
-        
-        xml=generarXML(daoProveedor.insertarProveedor(nombre, telefono, direccion, correo, tipo+1));
-        response.setContentType("txt/xml;charset=UTF-8");
-        response.getWriter().write(xml);
-        out.close();
+        try {
+            ProductoBean bean=new ProductoBean();
+            ProductoDAO  dao=new ProductoDAO();
+            int idProducto=Integer.parseInt(request.getParameter("idProducto"));
+            String nombre = request.getParameter("nombre");
+            String tipo = request.getParameter("tipo");
+            String cantidad= request.getParameter("cantidad");
+            String marcar=request.getParameter("marcar");
+            String precioCompra = request.getParameter("precio");
+            String precioVenta = request.getParameter("precioVenta");
+            String cantidadMin = request.getParameter("cantidadMinima");
+            String descripcion = request.getParameter("descripcion");
+            
+            bean.setIdProducto(idProducto);
+            bean.setNombre(nombre);
+            bean.setTipo(tipo);
+            bean.setCantidad(cantidad);
+            bean.setMarca(marcar);
+            bean.setPrecioCompra(precioCompra);
+            bean.setPrecioVenta(precioVenta);
+            bean.setCantidadMinima(cantidadMin);
+            bean.setDescripcion(descripcion);
+            
+            
+            String xml=generarXML(dao.modificarProducto(bean));
+            response.setContentType("text/xml;charset=UTF-8");
+            response.getWriter().write(xml);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServletModificarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            out.close();
+        }
     }
 
-    public String generarXML(boolean resultado) {
+    
+    public String generarXML(boolean producto){
         StringBuilder xml = new StringBuilder();
-
         xml.append("<resultado>");
-        xml.append("<respuesta>");
-        xml.append("<proveedor>");
-        xml.append(resultado);
-        xml.append("</proveedor>");
-        xml.append("</respuesta>");
-        xml.append("</resultado>");
-
-        return xml.toString();
-
+    xml.append("<respuesta>");
+    xml.append("<evento>");
+    xml.append(producto);
+    xml.append("</evento>");
+    xml.append("</respuesta>");
+    xml.append("</resultado>");
+        
+        return  xml.toString();
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
