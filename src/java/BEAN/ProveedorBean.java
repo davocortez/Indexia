@@ -11,7 +11,7 @@ package BEAN;
  * @author David
  */
 public class ProveedorBean {
-    private String idProvedor;
+    private String idProveedor;
     private String nombre;
     private String telefono;
     private String direccion;
@@ -20,11 +20,11 @@ public class ProveedorBean {
     private String idTipoProveedor;
 
     public String getIdProvedor() {
-        return idProvedor;
+        return idProveedor;
     }
 
     public void setIdProvedor(String idProvedor) {
-        this.idProvedor = idProvedor;
+        this.idProveedor = idProvedor;
     }
 
    

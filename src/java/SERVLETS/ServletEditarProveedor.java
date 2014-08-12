@@ -45,16 +45,16 @@ public class ServletEditarProveedor extends HttpServlet {
             String telefono=request.getParameter("telefono");
             String direccion=request.getParameter("direccion");
             String correo=request.getParameter("correo");
-            String estado=request.getParameter("estado");
-            String tipoProveedor=request.getParameter("tipoProveedor");
+//            String estado=request.getParameter("estado");
+//            String tipoProveedor=request.getParameter("tipoProveedor");
    
             beanProveedor.setIdProvedor(idProveedor);
             beanProveedor.setNombre(nombre);
             beanProveedor.setTelefono(telefono);
             beanProveedor.setDireccion(direccion);
             beanProveedor.setCorreo(correo);
-            beanProveedor.setEstado(estado);
-            beanProveedor.setIdTipoProveedor(tipoProveedor);
+//            beanProveedor.setEstado(estado);
+//            beanProveedor.setIdTipoProveedor(tipoProveedor);
 
             xml=generarXML(daoProveedor.modificarProveedor(beanProveedor));
             response.setContentType("text/xml;charset=UTF-8");
