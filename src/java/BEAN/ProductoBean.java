@@ -11,7 +11,7 @@ package BEAN;
  * @author David
  */
 public class ProductoBean {
-    private int idProducto;
+    private String idProducto;
     private String nombre;
     private String tipo;
     private String cantidad;
@@ -21,13 +21,15 @@ public class ProductoBean {
     private String cantidadMinima;
     private String descripcion;
 
-    public int getIdProducto() {
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
+
+    
 
     public String getNombre() {
         return nombre;

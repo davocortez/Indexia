@@ -12,6 +12,14 @@
         <servlet-name>ServletModificarProducto</servlet-name>
         <servlet-class>SERVLETS.ServletModificarProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletEliminarProducto</servlet-name>
+        <servlet-class>SERVLETS.ServletEliminarProducto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCobrarProducto</servlet-name>
+        <servlet-class>SERVLETS.ServletCobrarProducto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
         <url-pattern>/Service</url-pattern>
@@ -19,6 +27,14 @@
     <servlet-mapping>
         <servlet-name>ServletModificarProducto</servlet-name>
         <url-pattern>/ServletModificarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEliminarProducto</servlet-name>
+        <url-pattern>/ServletEliminarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCobrarProducto</servlet-name>
+        <url-pattern>/ServletCobrarProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

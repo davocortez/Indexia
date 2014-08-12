@@ -27,6 +27,7 @@ public class ProductoDAO {
     String sQlConsultarProducto = "select * from Producto ";
     String modificar = "UPDATE Producto SET nombre=(?), tipo=(?), cantidad=(?), marca=(?), precioCompra=(?), "
             + "precioVenta=(?), cantidadMinima=(?),descripcionProducto=(?) WHERE idProducto =?";
+    String eliminar = "delete from producto where idProducto=?";
 
     public boolean insertarProducto(String nombre, String tipo, String cantidad, String marca,
             String precioCompra, String precioVenta, String cantidadMinima, String descripcionProducto) {
@@ -62,7 +63,7 @@ public class ProductoDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ProductoBean bean = new ProductoBean();
-                bean.setIdProducto(rs.getInt(1));
+                bean.setIdProducto(rs.getString(1));
                 bean.setNombre(rs.getString(2));
                 bean.setTipo(rs.getString(3));
                 bean.setCantidad(rs.getString(4));
@@ -93,7 +94,7 @@ public class ProductoDAO {
             ps.setString(6, bean.getPrecioVenta());
             ps.setString(7, bean.getCantidadMinima());
             ps.setString(8, bean.getDescripcion());
-            ps.setInt(9, bean.getIdProducto());
+            ps.setString(9, bean.getIdProducto());
 
             resultado = ps.executeUpdate() == 1;
 
@@ -104,4 +105,19 @@ public class ProductoDAO {
 
     }
 
+    public boolean eliminarProducto(int eliminarID) throws SQLException {
+        boolean resultado = false;
+        try{
+        Connection con = ConexionSQLServer.getConnection();
+        PreparedStatement ps = con.prepareStatement(eliminar);
+         ps.setInt(1, eliminarID);
+         
+         resultado=ps.execute();
+          ps.close();
+            con.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }return resultado;
+
+    }
 }
