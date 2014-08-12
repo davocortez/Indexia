@@ -26,8 +26,8 @@ public class ProveedorDAO {
     String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,idTipoProvedor)values(?,?,?,?,?)";
     String consultar = "select * from Proveedor";
     String consultarTipo = "select * from TipoProvedor";
-     String modificarProveedor = "UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=?"
-             + ",Estado=?,TipoProveedor=? WHERE idProvedor=?;";
+    String modificarProveedor = "UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=?"
+                              + ",Estado=?,TipoProveedor=? WHERE idProvedor=?;";
 
     public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
         boolean status = false;
@@ -63,13 +63,13 @@ public class ProveedorDAO {
             while (rs.next()) {
                 ProveedorBean pbean = new ProveedorBean();
 
-                pbean.setIdProvedor(rs.getInt(1));
+                pbean.setIdProvedor(rs.getString(1));
                 pbean.setNombre(rs.getString(2));
                 pbean.setTelefono(rs.getString(3));
                 pbean.setDireccion(rs.getString(4));
                 pbean.setCorreo(rs.getString(5));
-                pbean.setEstado(rs.getByte(6));
-                pbean.setIdTipoProveedor(rs.getInt(7));
+                pbean.setEstado(rs.getString(6));
+                pbean.setIdTipoProveedor(rs.getString(7));
                 listaProveedor.add(pbean);
 
             }
@@ -120,7 +120,7 @@ public class ProveedorDAO {
             ps.setString(3, beanProveedor.getDireccion());
             ps.setString(4, beanProveedor.getCorreo());
             ps.setString(5, "1");
-           ps.setInt(6, beanProveedor.getIdTipoProveedor());
+            ps.setString(6, beanProveedor.getIdProvedor());
             resultado = ps.executeUpdate() == 1;
 
         } catch (SQLException ex) {

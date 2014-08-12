@@ -20,6 +20,10 @@
         <servlet-name>ServletCobrarProducto</servlet-name>
         <servlet-class>SERVLETS.ServletCobrarProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletEditarProveedor</servlet-name>
+        <servlet-class>SERVLETS.ServletEditarProveedor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
         <url-pattern>/Service</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>ServletCobrarProducto</servlet-name>
         <url-pattern>/ServletCobrarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEditarProveedor</servlet-name>
+        <url-pattern>/ServletEditarProveedor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

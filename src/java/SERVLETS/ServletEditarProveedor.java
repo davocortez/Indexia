@@ -15,12 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Erick Herrera
  */
-public class ServletModificarProveedor extends HttpServlet {
+public class ServletEditarProveedor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,45 +34,48 @@ public class ServletModificarProveedor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String xml = "";
+        String xml="";
         try {
-             String nombre = request.getParameter("nombre");
-            String telefono = request.getParameter("telefono");
-            String direccion = request.getParameter("direccion");
-            String correo = request.getParameter("correo");
-            int tipoProveedor = Integer.parseInt(request.getParameter("tipoProveedor"));
-            
-            ProveedorDAO daoProveedor = new ProveedorDAO();
-            //Guarda los Valores en el bean
+            /* TODO output your page here. You may use following sample code. */
             ProveedorBean beanProveedor = new ProveedorBean();
+            ProveedorDAO  daoProveedor = new ProveedorDAO();
+
+            String idProveedor=request.getParameter("idProveedor");
+            String nombre=request.getParameter("nombre");
+            String telefono=request.getParameter("telefono");
+            String direccion=request.getParameter("direccion");
+            String correo=request.getParameter("correo");
+            String estado=request.getParameter("estado");
+            String tipoProveedor=request.getParameter("tipoProveedor");
+   
+            beanProveedor.setIdProvedor(idProveedor);
             beanProveedor.setNombre(nombre);
             beanProveedor.setTelefono(telefono);
             beanProveedor.setDireccion(direccion);
             beanProveedor.setCorreo(correo);
+            beanProveedor.setEstado(estado);
             beanProveedor.setIdTipoProveedor(tipoProveedor);
 
-             xml = generarXML(daoProveedor.modificarProveedor(beanProveedor));
-
-            response.setContentType("txt/xml;charset=UTF-8");
+            xml=generarXML(daoProveedor.modificarProveedor(beanProveedor));
+            response.setContentType("text/xml;charset=UTF-8");
             response.getWriter().write(xml);
-            
         } finally {
             out.close();
         }
     }
     
-     private String generarXML(boolean modificarProveedor) {
+    private String generarXML(boolean modificarProveedor) {
+    
         StringBuilder xml = new StringBuilder();
+        xml.append("<resultado>");
+        xml.append("<respuesta>");
+        xml.append("<evento>");
+        xml.append(modificarProveedor);
+        xml.append("</evento>");
+        xml.append("</respuesta>");
+        xml.append("</resultado>");
         
-    xml.append("<resultado>");
-    xml.append("<respuesta>");
-    xml.append("<evento>");
-    xml.append(modificarProveedor);
-    xml.append("</evento>");
-    xml.append("</respuesta>");
-    xml.append("</resultado>");
-
-        return xml.toString();
+        return  xml.toString();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,9 +1,9 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package SERVLETS;
 
 import BEAN.ProveedorBean;
@@ -11,17 +11,15 @@ import DAO.ProveedorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author David
+ * @author Erick Herrera
  */
-@WebServlet(name = "ServletRegistrarProveedor", urlPatterns = {"/ServletRegistrarProveedor"})
-public class ServletRegistrarProveedor extends HttpServlet {
+public class ServletAltaProveedor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,46 +34,27 @@ public class ServletRegistrarProveedor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String xml = "";
-
-        ProveedorDAO daoProveedor = new ProveedorDAO();
-        
-        int tipo = 0;
-        String type="";
-
-        String nombre = request.getParameter("nombre");
-        System.out.println("campo de texto nombre: " + nombre);
-        String telefono = request.getParameter("telefono");
-        System.out.println("campo de texto telefono: " + telefono);
-        String direccion = request.getParameter("direccion");
-        System.out.println("campo de texto direccion: " + direccion);
-        String correo = request.getParameter("correo");
-        System.out.println("campo de texto correo: " + correo);
-        type = request.getParameter("tipoProveedor");
-        System.out.println("type: -----------------------"+type);
-        tipo = Integer.parseInt(type);
-        
- 
-        
-        xml=generarXML(daoProveedor.insertarProveedor(nombre, telefono, direccion, correo, tipo+1));
-        response.setContentType("txt/xml;charset=UTF-8");
-        response.getWriter().write(xml);
-        out.close();
-    }
-
-    public String generarXML(boolean resultado) {
-        StringBuilder xml = new StringBuilder();
-
-        xml.append("<resultado>");
-        xml.append("<respuesta>");
-        xml.append("<proveedor>");
-        xml.append(resultado);
-        xml.append("</proveedor>");
-        xml.append("</respuesta>");
-        xml.append("</resultado>");
-
-        return xml.toString();
-
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            String xml="";
+            
+            ProveedorDAO daoProveedor = new ProveedorDAO();
+            ProveedorBean bean = new ProveedorBean();
+            int tipo = 0;
+            
+            String nombre =request.getParameter("nombre");
+            String telefono=request.getParameter("telefono");
+            String direccion=request.getParameter("direccion");
+            String correo=request.getParameter("correo");
+            String type=request.getParameter("tipoProveedor");
+            
+            tipo=Integer.parseInt(type);
+            
+            
+    
+                    } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

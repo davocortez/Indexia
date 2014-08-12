@@ -11,21 +11,23 @@ package BEAN;
  * @author David
  */
 public class ProveedorBean {
-    private int idProvedor;
+    private String idProvedor;
     private String nombre;
     private String telefono;
     private String direccion;
     private String correo;
-    private byte estado;
-    private int idTipoProveedor;
+    private String estado;
+    private String idTipoProveedor;
 
-    public int getIdProvedor() {
+    public String getIdProvedor() {
         return idProvedor;
     }
 
-    public void setIdProvedor(int idProvedor) {
+    public void setIdProvedor(String idProvedor) {
         this.idProvedor = idProvedor;
     }
+
+   
 
     public String getNombre() {
         return nombre;
@@ -59,25 +61,20 @@ public class ProveedorBean {
         this.correo = correo;
     }
 
-    public byte getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(byte estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public int getIdTipoProveedor() {
+    public String getIdTipoProveedor() {
         return idTipoProveedor;
     }
 
-    public void setIdTipoProveedor(int idTipoProveedor) {
+    public void setIdTipoProveedor(String idTipoProveedor) {
         this.idTipoProveedor = idTipoProveedor;
     }
 
-    
-
-   
-    
-    
-}
+  }
