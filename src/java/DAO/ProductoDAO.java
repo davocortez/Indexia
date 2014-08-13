@@ -24,10 +24,10 @@ public class ProductoDAO {
 
     String registrar = "insert into Producto(nombre,tipo,cantidad,marca,precioCompra"
             + ",precioVenta,cantidadMinima,descripcionProducto)values(?,?,?,?,?,?,?,?)";
-    String sQlConsultarProducto = "select * from Producto ";
+    String sQlConsultarProducto = "select * from Producto where estado=1";
     String modificar = "UPDATE Producto SET nombre=(?), tipo=(?), cantidad=(?), marca=(?), precioCompra=(?), "
             + "precioVenta=(?), cantidadMinima=(?),descripcionProducto=(?) WHERE idProducto =?";
-    String eliminar = "delete from producto where idProducto=?";
+    String eliminar = "update producto set estado=0 where idProducto=?";
 
     public boolean insertarProducto(String nombre, String tipo, String cantidad, String marca,
             String precioCompra, String precioVenta, String cantidadMinima, String descripcionProducto) {
@@ -112,7 +112,7 @@ public class ProductoDAO {
         PreparedStatement ps = con.prepareStatement(eliminar);
          ps.setInt(1, eliminarID);
          
-         resultado=ps.execute();
+         resultado=ps.executeUpdate()==1;
           ps.close();
             con.close();
         }catch(SQLException ex){
