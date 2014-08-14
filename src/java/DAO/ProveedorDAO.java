@@ -24,11 +24,13 @@ import java.util.logging.Logger;
 public class ProveedorDAO {
 
     String insert = "insert into Proveedor(nombre,telefono,direccion,Correo,idTipoProvedor)values(?,?,?,?,?)";
-    String consultar = "select * from Proveedor";
+    String consultar = "select * from Proveedor where Estado=1";
     String consultarTipo = "select * from TipoProvedor";
     String modificarProveedor = " UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=? WHERE idProvedor=?;";
+    
 
-    public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
+
+      public boolean insertarProveedor(String nombre,String telefono,String direccion,String correo, int idTipo) {
         boolean status = false;
         try {
             Connection con = ConexionSQLServer.getConnection();
@@ -126,5 +128,29 @@ public class ProveedorDAO {
         }
         return resultado;
     }
+     
+     String eliminarProveedor=" UPDATE Proveedor Set Nombre=?,Telefono=?,Direccion=?,Correo=? ,Estado=? WHERE idProvedor=?;";
+     
+   public boolean eliminarProveedor(ProveedorBean beanProveedor){
+       boolean resultado = false;
+       
+       try {
+           Connection con = ConexionSQLServer.getConnection();
+           PreparedStatement ps = con.prepareStatement(eliminarProveedor);
+           
+           ps.setString(1, beanProveedor.getNombre());
+            ps.setString(2, beanProveedor.getTelefono());
+            ps.setString(3, beanProveedor.getDireccion());
+            ps.setString(4, beanProveedor.getCorreo());
+            ps.setString(5, beanProveedor.getEstado());
+            ps.setString(6, beanProveedor.getIdProvedor());
+            resultado = ps.executeUpdate() == 1;
 
-}
+           
+       } catch (Exception e) {
+          
+       }
+        return resultado;
+       
+   }
+ }

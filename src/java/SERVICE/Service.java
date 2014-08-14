@@ -6,9 +6,13 @@
 
 package SERVICE;
 
+import BEAN.ProductoBean;
 import DAO.LoginDAO;
+import DAO.ProductoDAO;
 import DAO.UsuarioDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
@@ -61,4 +65,25 @@ public class Service {
         }
         return respuesta;
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "consultarPedidos")
+    public List consultarPedidos() {
+        ProductoDAO dao=new ProductoDAO();
+        List<ProductoBean> listaProductos = new ArrayList<ProductoBean>();
+        for (int i = 0; i < dao.consultarProductos().size(); i++) {
+            ProductoBean bean = new ProductoBean();
+            
+            bean =(ProductoBean) dao.consultarProductos().get(i);
+            
+            listaProductos.add(bean);
+
+
+        
+    }
+    return listaProductos;
+    
 }
+    }

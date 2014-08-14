@@ -32,6 +32,10 @@
         <servlet-name>ServletReporte</servlet-name>
         <servlet-class>SERVLETS.ServletReporte</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletEliminarProveedor</servlet-name>
+        <servlet-class>SERVLETS.ServletEliminarProveedor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
         <url-pattern>/Service</url-pattern>
@@ -59,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>ServletReporte</servlet-name>
         <url-pattern>/ServletReporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEliminarProveedor</servlet-name>
+        <url-pattern>/ServletEliminarProveedor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
