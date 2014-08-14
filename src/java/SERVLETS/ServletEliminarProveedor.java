@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Erick Herrera
  */
+//eliminar
 public class ServletEliminarProveedor extends HttpServlet {
 
     /**
