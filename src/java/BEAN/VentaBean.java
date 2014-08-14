@@ -12,4 +12,5 @@ package BEAN;
  */
 public class VentaBean {
     
+    
 }

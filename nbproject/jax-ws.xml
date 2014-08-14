@@ -4,6 +4,9 @@
     <service name="Service">
       <implementation-class>SERVICE.Service</implementation-class>
     </service>
+    <service name="ServiceMono">
+      <implementation-class>SERVICE.ServiceMono</implementation-class>
+    </service>
   </services>
   <clients>
     <client name="Service">

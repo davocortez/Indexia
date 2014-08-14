@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import BEAN.VentaBean;
 import Utilerias.ConexionSQLServer;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -17,22 +18,23 @@ public class VentaDAO {
 
     public String venta = "{CALL cobrar(?,?,?,?)};";
 
-    public boolean cobrarVenta(int productoID, String precio, String cantidad, String ventaID) {
+    public boolean cobrarVenta(String productoID, String precio, String cantidad, String ventaID) {
 
         boolean status = false;
         try {
-
+            VentaBean bean=new VentaBean();
             Connection con = ConexionSQLServer.getConnection();
             CallableStatement cal = con.prepareCall(venta);
-            cal.setInt(1, productoID);
+            cal.setString(1, productoID);
             cal.setString(2, precio);
             cal.setString(3, cantidad);
             cal.setString(4, ventaID);
 
+            status = cal.executeUpdate() == 1;
             cal.close();
             con.close();
 
-            status = cal.executeUpdate() == 1;
+            
 
         } catch (Exception e) {
             e.printStackTrace();

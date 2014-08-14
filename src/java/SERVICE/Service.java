@@ -66,24 +66,4 @@ public class Service {
         return respuesta;
     }
 
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "consultarPedidos")
-    public List consultarPedidos() {
-        ProductoDAO dao=new ProductoDAO();
-        List<ProductoBean> listaProductos = new ArrayList<ProductoBean>();
-        for (int i = 0; i < dao.consultarProductos().size(); i++) {
-            ProductoBean bean = new ProductoBean();
-            
-            bean =(ProductoBean) dao.consultarProductos().get(i);
-            
-            listaProductos.add(bean);
-
-
-        
-    }
-    return listaProductos;
-    
-}
     }

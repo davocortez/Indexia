@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package SERVICE;
+
+import BEAN.ProductoBean;
+import DAO.ProductoDAO;
+import java.util.ArrayList;
+import java.util.List;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+/**
+ *
+ * @author David
+ */
+@WebService(serviceName = "ServiceMono")
+public class ServiceMono {
+
+    /**
+     * This is a sample web service operation
+     */
+    @WebMethod(operationName = "hello")
+    public String hello(@WebParam(name = "name") String txt) {
+        return "Hello " + txt + " !";
+    }
+    
+     /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "consultarProdc")
+    public String consultarProdc() {
+        //TODO write your implementation code here:
+        ProductoDAO dao = new ProductoDAO();
+        List<ProductoBean> listProductos = new ArrayList();
+        String respuesta = "";
+        
+        listProductos = dao.consultarProductos();
+        
+        for (ProductoBean productoBean : listProductos) {
+            respuesta +=""+productoBean.getNombre()+"," +productoBean.getPrecioVenta()+","+productoBean.getCantidad()+"-";           
+        }
+        System.out.println(""+respuesta);
+        return respuesta;
+    }
+}

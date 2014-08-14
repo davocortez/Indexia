@@ -36,6 +36,11 @@
         <servlet-name>ServletEliminarProveedor</servlet-name>
         <servlet-class>SERVLETS.ServletEliminarProveedor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceMono</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
         <url-pattern>/Service</url-pattern>
@@ -67,6 +72,10 @@
     <servlet-mapping>
         <servlet-name>ServletEliminarProveedor</servlet-name>
         <url-pattern>/ServletEliminarProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceMono</servlet-name>
+        <url-pattern>/ServiceMono</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
